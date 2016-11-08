@@ -4,7 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>pin1n</title>
+    <link rel="stylesheet" type="text/css" href="../libs/css/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/screen.css">
+
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script src="../libs/js/jquery.min.js"></script>
+    <script src="../libs/js/semantic.min.js"></script>
+    <script>if (window.module) module = window.module;</script>
   </head>
   <body>
+    <form id="workspace" class="ui form">
+      <div class="ui two fields">
+        <div class="ui field">
+          <label>Original</label>
+          <textarea id="srcCanvas"></textarea>
+        </div>
+        <div class="ui field">
+          <label>Converted</label>
+          <textarea id="dstCanvas" readonly=""></textarea>
+        </div>
+      </div>
+    </form>
   </body>
 </html>
