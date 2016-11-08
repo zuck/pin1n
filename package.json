@@ -1,0 +1,34 @@
+{
+  "name": "pin1n",
+  "productName": "pin1n",
+  "version": "0.1.0",
+  "description": "A user-friendly chinese-to-pinyin converter",
+  "main": "app/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --debug"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zuck/pin1n.git"
+  },
+  "keywords": [
+    "pinyin",
+    "chinese",
+    "hanyu",
+    "electron"
+  ],
+  "author": "Emanuele Bertoldi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zuck/pin1n/issues"
+  },
+  "homepage": "https://github.com/zuck/pin1n#readme",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "electron": ">=1.4.4",
+    "electron-reload": ">=1.0.2",
+    "electron-packager": ">=7.7.0"
+  }
+}
