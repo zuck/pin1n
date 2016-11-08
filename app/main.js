@@ -29,6 +29,7 @@ function createWindow () {
   // Create the browser window.
   app.mainWindow = new BrowserWindow({
     width: 1024, height: 768,
+    icon: __dirname + "/ux/images/logo.png",
     backgroundColor: '#282c34',
     show: false
   });
