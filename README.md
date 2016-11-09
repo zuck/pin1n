@@ -6,7 +6,6 @@ A user-friendly chinese-to-pinyin converter.
 
 ```
 npm install
-./node_modules/.bin/electron-rebuild
 ```
 
 ## Running
