@@ -1,0 +1,27 @@
+@page {
+  size: 210mm 297mm;
+}
+
+#workspace,
+#workspace .row,
+#workspace .row .column,
+#workspace .editable {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+#workspace {
+  width: 100% !important;
+}
+
+#workspace .row .column:first-of-type,
+#input.editable,
+#print.button,
+.mce-toolbar {
+  display: none !important;
+}
+
+#output.editable {
+  width: 100% !important;
+  overflow: visible;
+}

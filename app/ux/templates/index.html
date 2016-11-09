@@ -7,21 +7,28 @@
     <link rel="shortcut icon" href="../images/logo.png">
     <link rel="stylesheet" type="text/css" href="../libs/css/semantic.min.css">
     <link rel="stylesheet" type="text/css" href="../css/screen.css">
+    <link rel="stylesheet" type="text/css" media="print" href="../css/print.css">
 
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
     <script src="../libs/js/jquery.min.js"></script>
     <script src="../libs/js/semantic.min.js"></script>
     <script src="../libs/js/tinymce/tinymce.min.js"></script>
     <script src="../../pin1n.js"></script>
+    <script src="../../printer.js"></script>
     <script>if (window.module) module = window.module;</script>
   </head>
   <body>
-    <div id="workspace">
-      <div class="column">
-        <div class="editable" id="input"></div>
-      </div>
-      <div class="column">
-        <div class="editable" id="output"></div>
+    <div id="workspace" class="ui equal width padded grid">
+      <div class="row">
+        <div class="column">
+          <div class="editable" id="input"></div>
+        </div>
+        <div class="column">
+          <div class="editable" id="output"></div>
+          <a id="print" class="ui circular positive huge icon button">
+            <i class="print icon"></i>
+          </a>
+        </div>
       </div>
     </div>
     <script>
@@ -50,10 +57,12 @@
           theme: null,
           inline: true,
           menubar: false,
-          toolbar: false,
           elementpath: false,
           statusbar: false
         });
+
+        // Init print button...
+        $('#print.button').click(printToPDF);
       });
     </script>
   </body>

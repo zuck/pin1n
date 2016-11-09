@@ -14,11 +14,11 @@ if (env == "development") {
 // Module to control application life.
 const app = electron.app;
 
+// Module to control IPC
+const ipc = electron.ipcMain;
+
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
-
-// Base path for storing public user's data.
-const userPublicDataPath = app.getPath('home') + "/" + app.getName();
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -33,9 +33,6 @@ function createWindow () {
     backgroundColor: '#282c34',
     show: false
   });
-
-  // Create the public user's data folder.
-  fs.mkdir(userPublicDataPath, function() {});
 
   // Load the index.html of the app.
   app.mainWindow.loadURL(`file://${__dirname}/ux/templates/index.html`);
@@ -85,4 +82,9 @@ app.on('activate', function () {
   // dock icon is clicked and there are no other windows open.
   if (app.mainWindow === null)
     createWindow();
+});
+
+ipc.on('print-to-pdf', function (event) {
+  var win = BrowserWindow.fromWebContents(event.sender);
+  win.webContents.print({});
 });
