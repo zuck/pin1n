@@ -26,8 +26,8 @@
   },
   "homepage": "https://github.com/zuck/pin1n#readme",
   "dependencies": {
-    "nodejieba": ">=2.2.3",
-    "pinyin": ">=2.8.0"
+    "segment": ">=0.1.3",
+    "pinyin": ">=0.0.7"
   },
   "devDependencies": {
     "electron": ">=1.4.4",
