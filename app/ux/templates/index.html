@@ -12,6 +12,7 @@
     <script src="../libs/js/jquery.min.js"></script>
     <script src="../libs/js/semantic.min.js"></script>
     <script src="../libs/js/tinymce/tinymce.min.js"></script>
+    <script src="../../pin1n.js"></script>
     <script>if (window.module) module = window.module;</script>
   </head>
   <body>
@@ -24,53 +25,35 @@
       </div>
     </div>
     <script>
-      var pinyin = require("pinyin");
-      var nodejieba = require("nodejieba");
-
-      function convertToPinyin(content) {
-        var src = content || "";
-        return src
-          .split('\n')
-          .map(function(line) {
-            return nodejieba
-              .cut(line)
-              .map(function(word) {
-                var wordPinyin = pinyin(word).join('');
-                if (word != wordPinyin)
-                  wordPinyin = wordPinyin + " ";
-                return wordPinyin;
-              })
-              .join('');
-          })
-          .join('\n');
-      }
-
-      // Init editors...
-      tinymce.init({
-        selector: '.editable#input',
-        theme: 'inlite',
-        inline: true,
-        menubar: false,
-        elementpath: false,
-        statusbar: false,
-        init_instance_callback: function (editor) {
-          editor.on('SetContent', function (e) {
-            var pinyinString = convertToPinyin($(this.bodyElement).html());
-            $('#output').html(pinyinString);
-          });
-          editor.on('Change', function (e) {
-            var pinyinString = convertToPinyin($(this.bodyElement).html());
-            $('#output').html(pinyinString);
-          });
-        }
-      });
-      tinymce.init({
-        selector: '.editable#output',
-        inline: true,
-        menubar: false,
-        toolbar: false,
-        elementpath: false,
-        statusbar: false
+      $(function() {
+        // Init editors...
+        tinymce.init({
+          selector: '.editable#input',
+          theme: 'inlite',
+          inline: true,
+          menubar: false,
+          elementpath: false,
+          statusbar: false,
+          init_instance_callback: function (editor) {
+            editor.on('SetContent', function (e) {
+              var pinyinString = convertToPinyin($(this.bodyElement).html());
+              $('#output').html(pinyinString);
+            });
+            editor.on('Change', function (e) {
+              var pinyinString = convertToPinyin($(this.bodyElement).html());
+              $('#output').html(pinyinString);
+            });
+          }
+        });
+        tinymce.init({
+          selector: '.editable#output',
+          theme: null,
+          inline: true,
+          menubar: false,
+          toolbar: false,
+          elementpath: false,
+          statusbar: false
+        });
       });
     </script>
   </body>
