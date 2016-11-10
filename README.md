@@ -16,6 +16,12 @@ npm install
 npm start
 ```
 
+for **dev mode**:
+
+```
+NODE_ENV=development npm start
+```
+
 ## Test
 
 ```
