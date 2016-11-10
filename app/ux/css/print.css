@@ -8,20 +8,24 @@
 #workspace .editable {
   padding: 0 !important;
   margin: 0 !important;
+  width: 100% !important;
+  height: auto !important;
+  max-height: auto !important;
 }
 
 #workspace {
-  width: 100% !important;
 }
 
 #workspace .row .column:first-of-type,
+#workspace .button,
 #input.editable,
-#print.button,
 .mce-toolbar {
   display: none !important;
 }
 
 #output.editable {
-  width: 100% !important;
-  overflow: visible;
+  overflow: visible !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: none !important;
 }
