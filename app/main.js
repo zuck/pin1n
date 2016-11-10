@@ -2,12 +2,16 @@
 
 var fs = require('fs');
 var electron = require('electron');
-var env = process.env.NODE_ENV || 'development';
+
+function isDev() {
+  var env = process.env.NODE_ENV || "production";
+  return env == "development"
+}
 
 // Hot-reload on development.
-if (env == "development") {
+if (isDev()) {
   require('electron-reload')(__dirname, {
-    // electron: require('electron-prebuilt') // For hard reset...
+    electron: require('electron') // For hard reset...
   });
 }
 
@@ -57,7 +61,7 @@ function createWindow () {
   app.mainWindow.webContents.on('did-finish-load', function() {
     // During development, open the window not maximized and launch dev tools.
     // On production, instead, maximize the window and don't show dev tools.
-    if (env == "development") {
+    if (isDev()) {
       app.mainWindow.webContents.openDevTools();
     } else {
       app.mainWindow.maximize();
@@ -151,7 +155,7 @@ function createWindowMenu() {
     }]
   }];
 
-  if (env == "development") {
+  if (isDev()) {
     // Window menu.
     template[3].submenu = [{
       label: 'Reload',
