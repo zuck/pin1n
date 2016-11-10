@@ -28,6 +28,12 @@ NODE_ENV=development npm start
 npm test
 ```
 
+## Packaging
+
+```
+npm run package
+```
+
 ## License
 
 The MIT License (MIT)
