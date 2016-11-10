@@ -2,6 +2,8 @@
 
 A user-friendly chinese-to-pinyin converter.
 
+![Overview](https://raw.githubusercontent.com/zuck/pin1n/master/artwork/screenshot.png "pin1n")
+
 ## Installation
 
 ```
