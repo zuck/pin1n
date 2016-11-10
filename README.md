@@ -1,4 +1,4 @@
-# pin1n
+# ![pin1n](https://raw.githubusercontent.com/zuck/pin1n/master/app/ux/images/logo.png "pin1n") pin1n
 
 A user-friendly chinese-to-pinyin converter.
 
