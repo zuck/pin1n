@@ -84,7 +84,7 @@ app.on('activate', function () {
     createWindow();
 });
 
-ipc.on('print-to-pdf', function (event) {
+ipc.on('print-to', function (event) {
   var win = BrowserWindow.fromWebContents(event.sender);
   win.webContents.print({});
 });

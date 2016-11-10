@@ -2,10 +2,10 @@
 
 var ipc = require('electron').ipcRenderer;
 
-function printToPDF() {
-  ipc.send('print-to-pdf');
+function printTo() {
+  ipc.send('print-to');
 }
 
 if (module) {
-  module.exports = printToPDF;
+  module.exports = printTo;
 }

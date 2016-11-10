@@ -22,11 +22,17 @@
       <div class="row">
         <div class="column">
           <div class="editable" id="input"></div>
+          <a id="translate" class="ui circular orange huge icon button">
+            <i class="translate icon"></i>
+          </a>
         </div>
         <div class="column">
           <div class="editable" id="output"></div>
           <a id="print" class="ui circular positive huge icon button">
             <i class="print icon"></i>
+          </a>
+          <a id="edit" class="ui circular big icon button">
+            <i class="chevron left icon"></i>
           </a>
         </div>
       </div>
@@ -61,8 +67,18 @@
           statusbar: false
         });
 
+        // Init translate button...
+        $('#translate.button').click(function(evt) {
+          $('#workspace').addClass('translated');
+        });
+
         // Init print button...
-        $('#print.button').click(printToPDF);
+        $('#print.button').click(printTo);
+
+        // Init edit button...
+        $('#edit.button').click(function(evt) {
+          $('#workspace').removeClass('translated');
+        });
       });
     </script>
   </body>

@@ -5,7 +5,12 @@ body {
 #workspace {
   width: 200%;
   height: 100% !important;
+  transition: margin-left 1s;
   overflow: hidden;
+}
+
+#workspace .row .column {
+  position: relative;
 }
 
 #workspace .editable {
@@ -14,18 +19,54 @@ body {
   height: 100%;
   overflow: auto;
   background-color: #fff;
-  box-shadow: 1px 0 20px rgba(34,36,38,.15);
+  box-shadow: 0 1px 10px rgba(34,36,38,.5);
 }
 
 .editable#output {
   background-color: #fafbfc;
 }
 
-#print.button {
+#translate.button,
+#print.button,
+#edit.button {
   position: absolute;
-  right: 1.5rem;
-  bottom: 1rem;
-  box-shadow: 1px 0 0 rgba(34,36,38,.5);
+  margin: 2rem;
+  bottom: 0;
+  box-shadow: 0 1px 2px rgba(34,36,38,.8);
+}
+
+#translate.button {
+  right: 0;
+}
+
+#print.button {
+  right: 0;
+}
+
+#edit.button {
+  left: 0;
+}
+
+@media (max-width: 767px) {
+  #workspace .row,
+  #workspace .row .column {
+    padding: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  #translate.button,
+  #print.button,
+  #edit.button {
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+}
+
+@media (max-width: 991px) {
+  #workspace.translated {
+    margin-left: -100% !important;
+  }
 }
 
 @media (min-width: 992px) {
@@ -36,6 +77,11 @@ body {
 
   #workspace .column:first-of-type {
     padding-right: .5rem;
+  }
+
+  #translate.button,
+  #edit.button {
+    display: none;
   }
 
   #workspace .column:last-of-type {
