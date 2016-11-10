@@ -6,8 +6,8 @@
   "main": "app/main.js",
   "scripts": {
     "start": "electron .",
-    "dev": "electron . --debug",
-    "test": "mocha"
+    "test": "mocha",
+    "package": "electron-packager . --overwrite --icon=./app/ux/images/logo.png"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,10 @@
     "hanyu",
     "electron"
   ],
-  "author": "Emanuele Bertoldi",
+  "author": {
+    "name": "Emanuele Bertoldi",
+    "email": "emanuele.bertoldi@gmail.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/zuck/pin1n/issues"
