@@ -51,6 +51,7 @@
           menubar: false,
           elementpath: false,
           statusbar: false,
+          selection_toolbar: 'bold italic underline | alignleft aligncenter alignright alignjustify | h1',
           init_instance_callback: function (editor) {
             editor.on('NodeChange', function (e) {
               var content = $(this.bodyElement).html();
