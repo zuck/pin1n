@@ -21,24 +21,28 @@
     <div id="workspace" class="ui equal width padded grid">
       <div class="row">
         <div class="column">
-          <div class="editable" id="input"></div>
+          <div class="editable segment" id="input"></div>
           <a id="translate" class="ui circular orange huge icon button">
             <i class="translate icon"></i>
           </a>
         </div>
         <div class="column">
-          <div class="editable" id="output"></div>
+          <div class="editable segment" id="output"></div>
           <a id="print" class="ui circular positive huge icon button">
             <i class="print icon"></i>
           </a>
           <a id="edit" class="ui circular big icon button">
             <i class="chevron left icon"></i>
           </a>
+          <div class="ui inverted dimmer">
+            <div class="ui loader"></div>
+          </div>
         </div>
       </div>
     </div>
     <script>
       $(function() {
+
         // Init editors...
         tinymce.init({
           selector: '.editable#input',
@@ -48,16 +52,16 @@
           elementpath: false,
           statusbar: false,
           init_instance_callback: function (editor) {
-            editor.on('SetContent', function (e) {
-              var pinyinString = convertToPinyin($(this.bodyElement).html());
-              $('#output').html(pinyinString);
-            });
-            editor.on('Change', function (e) {
-              var pinyinString = convertToPinyin($(this.bodyElement).html());
+            editor.on('NodeChange', function (e) {
+              var content = $(this.bodyElement).html();
+              var pinyinString = convertToPinyin(content);
               $('#output').html(pinyinString);
             });
           }
+        }).then(function(editors) {
+          if (editors.length) editors[0].focus();
         });
+
         tinymce.init({
           selector: '.editable#output',
           theme: null,
