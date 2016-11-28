@@ -43,6 +43,11 @@
     <script>
       $(function() {
 
+        function updatePinyinFrom(content) {
+          var pinyin = convertToPinyin(content); // FIXME: move to another thread...
+          $('#output').html(pinyin);
+        }
+
         // Init editors...
         tinymce.init({
           selector: '.editable#input',
@@ -55,8 +60,7 @@
           init_instance_callback: function (editor) {
             editor.on('NodeChange', function (e) {
               var content = $(this.bodyElement).html();
-              var pinyinString = convertToPinyin(content);
-              $('#output').html(pinyinString);
+              updatePinyinFrom(content);
             });
           }
         }).then(function(editors) {
@@ -75,7 +79,12 @@
 
         // Init translate button...
         $('#translate.button').click(function(evt) {
+          var $button = $(this);
+          $button.addClass('loading');
+          var content = $('#input').html();
+          updatePinyinFrom(content);
           $('#workspace').addClass('translated');
+          $button.removeClass('loading');
         });
 
         // Init print button...
