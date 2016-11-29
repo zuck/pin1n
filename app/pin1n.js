@@ -101,13 +101,15 @@ function convertToPinyin(content) {
     .replace(/；/g, '; ')
     .replace(/！/g, '! ')
     .replace(/？/g, '? ')
+    .replace(/「/g, ' «')
+    .replace(/」/g, '» ')
     .replace(/ \./g, '.')
     .replace(/ \,/g, ',')
     .replace(/ \:/g, ':')
     .replace(/ \;/g, ';')
     .replace(/ \!/g, '!')
     .replace(/ \?/g, '?')
-    .replace(/  /g, ' ')
+    .replace(/\s\s/g, ' ')
     .replace(/ \n/g, '\n')
     .trim();
   return output;

@@ -17,7 +17,7 @@ describe('#convertToPinyin', function() {
     assert.equal(convertToPinyin(" My name is Bob  "), "My name is Bob");
   });
   it("should replace chinese punctuation symbols with western ones", function() {
-    assert.equal(convertToPinyin("My name is：Bond，James Bond。Are you sure？Yes！"), "My name is: Bond, James Bond. Are you sure? Yes!");
+    assert.equal(convertToPinyin("My name is：Bond，「James Bond」。Are you sure？Yes：James、Bond！"), "My name is: Bond, «James Bond». Are you sure? Yes: James, Bond!");
   });
   it("should replace hanzi with its pinyin", function() {
     assert.equal(convertToPinyin("我的名字是Bob"), "wǒ de míngzì shì Bob");
