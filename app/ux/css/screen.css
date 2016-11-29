@@ -14,12 +14,10 @@ body {
 }
 
 #workspace .editable {
-  padding: 1rem;
   width: 100%;
   height: 100%;
   overflow: auto;
   background-color: #fff;
-  box-shadow: 0 1px 10px rgba(34,36,38,.5);
 }
 
 .editable#output {

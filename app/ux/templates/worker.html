@@ -1,0 +1,14 @@
+<html>
+  <script type="text/javascript">
+    const ipc = require('electron').ipcRenderer;
+    const BrowserWindow = require('electron').remote.BrowserWindow;
+    const convertToPinyin = require("../../pin1n.js");
+
+    ipc.on('compute-pinyin', function (event, content, fromWindowId) {
+      const result = convertToPinyin(content);
+      const fromWindow = BrowserWindow.fromId(fromWindowId);
+      fromWindow.webContents.send('pinyin-computed', content, result);
+      window.close();
+    });
+  </script>
+</html>

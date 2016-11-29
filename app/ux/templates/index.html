@@ -10,10 +10,10 @@
     <link rel="stylesheet" type="text/css" media="print" href="../css/print.css">
 
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script src="../libs/js/bluebird.min.js"></script>
     <script src="../libs/js/jquery.min.js"></script>
     <script src="../libs/js/semantic.min.js"></script>
     <script src="../libs/js/tinymce/tinymce.min.js"></script>
-    <script src="../../pin1n.js"></script>
     <script src="../../printer.js"></script>
     <script>if (window.module) module = window.module;</script>
   </head>
@@ -21,33 +21,53 @@
     <div id="workspace" class="ui equal width padded grid">
       <div class="row">
         <div class="column">
-          <div class="editable segment" id="input"></div>
+          <div class="ui editable segment" id="input"></div>
           <a id="translate" class="ui circular orange huge icon button">
             <i class="chevron right icon"></i>
           </a>
         </div>
         <div class="column">
-          <div class="editable segment" id="output"></div>
+          <div class="ui editable segment" id="output"></div>
           <a id="print" class="ui circular positive huge icon button">
             <i class="print icon"></i>
           </a>
           <a id="edit" class="ui circular big icon button">
             <i class="chevron left icon"></i>
           </a>
-          <div class="ui inverted dimmer">
-            <div class="ui loader"></div>
-          </div>
+          <div class="ui loader"></div>
         </div>
       </div>
     </div>
     <script>
+      const remote = require('electron').remote;
+      const BrowserWindow = require('electron').remote.BrowserWindow;
+      const ipcRenderer = require('electron').ipcRenderer;
+
+      var $loader = $('#output').siblings('.ui.loader');
+      var $translateBtn = $('#translate.button');
+      var $printBtn = $('#print.button');
+      var $editBtn = $('#edit.button');
+
+      function updatePinyin() {
+        $translateBtn.addClass('loading');
+        $loader.addClass('active');
+        const windowID = remote.getCurrentWindow().id
+        const invisPath = 'file://' + __dirname + '/worker.html'
+        let win = new BrowserWindow({ width: 400, height: 400, show: false })
+        win.loadURL(invisPath)
+        win.webContents.on('did-finish-load', function () {
+          var content = $('#input').html();
+          win.webContents.send('compute-pinyin', content, windowID)
+        })
+      }
+
+      ipcRenderer.on('pinyin-computed', function (event, input, output) {
+        $('#output').html(output);
+        $translateBtn.removeClass('loading');
+        $loader.removeClass('active');
+      });
+
       $(function() {
-
-        function updatePinyinFrom(content) {
-          var pinyin = convertToPinyin(content); // FIXME: move to another thread...
-          $('#output').html(pinyin);
-        }
-
         // Init editors...
         tinymce.init({
           selector: '.editable#input',
@@ -59,8 +79,7 @@
           selection_toolbar: 'bold italic underline | alignleft aligncenter alignright alignjustify | h1',
           init_instance_callback: function (editor) {
             editor.on('NodeChange', function (e) {
-              var content = $(this.bodyElement).html();
-              updatePinyinFrom(content);
+              updatePinyin();
             });
           }
         }).then(function(editors) {
@@ -78,20 +97,16 @@
         });
 
         // Init translate button...
-        $('#translate.button').click(function(evt) {
-          var $button = $(this);
-          $button.addClass('loading');
-          var content = $('#input').html();
-          updatePinyinFrom(content);
+        $translateBtn.click(function(evt) {
+          updatePinyin();
           $('#workspace').addClass('translated');
-          $button.removeClass('loading');
         });
 
         // Init print button...
-        $('#print.button').click(printTo);
+        $printBtn.click(printTo);
 
         // Init edit button...
-        $('#edit.button').click(function(evt) {
+        $editBtn.click(function(evt) {
           $('#workspace').removeClass('translated');
         });
       });
