@@ -77,6 +77,9 @@
           elementpath: false,
           statusbar: false,
           selection_toolbar: 'bold italic underline | alignleft aligncenter alignright alignjustify | h1',
+          plugins: "contextmenu",
+          contextmenu_never_use_native: true,
+          contextmenu: "undo redo | cut copy paste selectall",
           init_instance_callback: function (editor) {
             editor.on('NodeChange', function (e) {
               updatePinyin();
@@ -93,7 +96,10 @@
           menubar: false,
           elementpath: false,
           statusbar: false,
-          selection_toolbar: 'bold italic underline | alignleft aligncenter alignright alignjustify | h1'
+          selection_toolbar: 'bold italic underline | alignleft aligncenter alignright alignjustify | h1',
+          plugins: "contextmenu",
+          contextmenu_never_use_native: true,
+          contextmenu: "undo redo | cut copy paste selectall"
         });
 
         // Init translate button...
