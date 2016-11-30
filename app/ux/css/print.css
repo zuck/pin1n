@@ -1,31 +1,24 @@
 @page {
-  size: 210mm 297mm;
+  size: A4;
 }
 
 #workspace,
-#workspace .row,
-#workspace .row .column,
 #workspace .editable {
   padding: 0 !important;
   margin: 0 !important;
+  width: auto;
   width: 100% !important;
   height: auto !important;
+  min-height: 100% !important;
   max-height: auto !important;
-}
-
-#workspace {
-}
-
-#workspace .row .column:first-of-type,
-#workspace .button,
-#input.editable,
-.mce-toolbar {
-  display: none !important;
-}
-
-#output.editable {
   overflow: visible !important;
   border: none !important;
   box-shadow: none !important;
   background: none !important;
+}
+
+#input,
+#workspace .button,
+.mce-toolbar {
+  display: none !important;
 }

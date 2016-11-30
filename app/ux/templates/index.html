@@ -18,24 +18,21 @@
     <script>if (window.module) module = window.module;</script>
   </head>
   <body>
-    <div id="workspace" class="ui equal width padded grid">
-      <div class="row">
-        <div class="column">
-          <div class="ui editable segment" id="input"></div>
-          <a id="translate" class="ui circular orange huge icon button">
-            <i class="chevron right icon"></i>
-          </a>
-        </div>
-        <div class="column">
-          <div class="ui editable segment" id="output"></div>
-          <a id="print" class="ui circular positive huge icon button">
-            <i class="print icon"></i>
-          </a>
-          <a id="edit" class="ui circular big icon button">
-            <i class="chevron left icon"></i>
-          </a>
-          <div class="ui loader"></div>
-        </div>
+    <div id="workspace" class="ui horizontal segments">
+      <div id="input" class="ui basic segment">
+        <div class="editable"></div>
+        <a id="translate" class="ui circular orange big icon button">
+          <i class="chevron right icon"></i>
+        </a>
+      </div>
+      <div id="output" class="ui basic segment">
+        <div class="editable"></div>
+        <a id="print" class="ui circular positive big icon button">
+          <i class="print icon"></i>
+        </a>
+        <a id="edit" class="ui circular big icon button">
+          <i class="chevron left icon"></i>
+        </a>
       </div>
     </div>
     <script>
@@ -43,34 +40,37 @@
       const BrowserWindow = require('electron').remote.BrowserWindow;
       const ipcRenderer = require('electron').ipcRenderer;
 
-      var $loader = $('#output').siblings('.ui.loader');
-      var $translateBtn = $('#translate.button');
-      var $printBtn = $('#print.button');
-      var $editBtn = $('#edit.button');
+      var $input = $('#input');
+      var $output = $('#output');
+      var $inputArea = $('#input .editable');
+      var $outputArea = $('#output .editable');
+      var $translateBtn = $('#input #translate.button');
+      var $printBtn = $('#output #print.button');
+      var $editBtn = $('#output #edit.button');
 
       function updatePinyin() {
         $translateBtn.addClass('loading');
-        $loader.addClass('active');
+        $output.addClass('loading');
         const windowID = remote.getCurrentWindow().id
         const invisPath = 'file://' + __dirname + '/worker.html'
         let win = new BrowserWindow({ width: 400, height: 400, show: false })
         win.loadURL(invisPath)
         win.webContents.on('did-finish-load', function () {
-          var content = $('#input').html();
+          var content = $inputArea.html();
           win.webContents.send('compute-pinyin', content, windowID)
         })
       }
 
       ipcRenderer.on('pinyin-computed', function (event, input, output) {
-        $('#output').html(output);
+        $outputArea.html(output);
         $translateBtn.removeClass('loading');
-        $loader.removeClass('active');
+        $output.removeClass('loading');
       });
 
       $(function() {
         // Init editors...
         tinymce.init({
-          selector: '.editable#input',
+          selector: '#input .editable',
           theme: 'inlite',
           inline: true,
           menubar: false,
@@ -90,7 +90,7 @@
         });
 
         tinymce.init({
-          selector: '.editable#output',
+          selector: '#output .editable',
           theme: 'inlite',
           inline: true,
           menubar: false,
